@@ -1,10 +1,6 @@
 import fs from 'fs'
-
-const { readFile } = fs.promises
-
-const toHex = n => {
-  return '0x' + n.toString(16)
-}
+import { toHex } from './helpers.mjs'
+import { DLF_HEADER_SIZE, FTS_HEADER_SIZE, FTS_UNIQUE_HEADER_SIZE } from './constants.mjs'
 
 const filename = process.argv.slice(2)[0]
 const extension = filename.match(/\.([a-zA-Z]+)$/)[1].toLowerCase()
@@ -16,12 +12,12 @@ const outputRequestedAsHex = process.argv[3] === '--hex'
 
     switch (extension) {
       case 'dlf':
-        size = 8520
+        size = DLF_HEADER_SIZE
         break
       case 'fts': {
-        const buffer = await readFile(filename)
+        const buffer = await fs.promises.readFile(filename)
         const numberOfUniqueHeaders = buffer.readInt32LE(256)
-        size = 280 + 768 * numberOfUniqueHeaders
+        size = FTS_HEADER_SIZE + FTS_UNIQUE_HEADER_SIZE * numberOfUniqueHeaders
       }
         break
     }
