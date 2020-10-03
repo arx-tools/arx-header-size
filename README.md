@@ -10,11 +10,11 @@ This is needed, because the files are partially compressed and this number can b
 
 ## Usage
 
-`npx arx-header-size --filename="C:\arx\arx-pak-full\final\GAME\GRAPH\Levels\level8\fast.fts"`
+`npx arx-header-size "C:\arx\arx-pak-full\final\GAME\GRAPH\Levels\level8\fast.fts"`
 
 outputs `1816`
 
-`npx arx-header-size --filename="C:\arx\arx-pak-full\final\GAME\GRAPH\Levels\level8\fast.fts" --hex`
+`npx arx-header-size "C:\arx\arx-pak-full\final\GAME\GRAPH\Levels\level8\fast.fts" --hex`
 
 outputs `0x718`
 
