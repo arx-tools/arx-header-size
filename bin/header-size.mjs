@@ -1,7 +1,9 @@
+#!/usr/bin/env node --experimental-modules
+
 import fs from 'fs'
 import minimist from 'minimist'
-import { toHex } from './helpers.mjs'
-import { DLF_HEADER_SIZE, FTS_HEADER_SIZE, FTS_UNIQUE_HEADER_SIZE } from './constants.mjs'
+import { toHex } from '../src/helpers.mjs'
+import { DLF_HEADER_SIZE, FTS_HEADER_SIZE, FTS_UNIQUE_HEADER_SIZE } from '../src/constants.mjs'
 
 const args = minimist(process.argv.slice(2), {
   string: ['filename'],

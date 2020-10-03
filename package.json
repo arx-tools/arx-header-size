@@ -3,9 +3,10 @@
   "version": "0.0.1",
   "description": "Returns the header size for Arx Fatalis files with dynamic headers",
   "main": "index.js",
-  "scripts": {
-    "test": "node --experimental-modules src/index.mjs"
+  "bin": {
+    "arx-header-size": "bin/header-size.mjs"
   },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/meszaros-lajos-gyorgy/arx-header-size.git"
