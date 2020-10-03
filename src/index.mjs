@@ -24,6 +24,9 @@ const outputRequestedAsHex = args.hex
         size = FTS_HEADER_SIZE + FTS_UNIQUE_HEADER_SIZE * numberOfUniqueHeaders
       }
         break
+      case 'llf': {
+        size = LLF_HEADER_SIZE
+      }
     }
 
     if (outputRequestedAsHex) {
