@@ -2,6 +2,10 @@ import fs from 'fs'
 
 const { readFile } = fs.promises
 
+const toHex = n => {
+  return '0x' + n.toString(16)
+}
+
 const filename = process.argv.slice(2)[0]
 const extension = filename.match(/\.([a-zA-Z]+)$/)[1].toLowerCase()
 
@@ -23,7 +27,7 @@ const outputRequestedAsHex = process.argv[3] === '--hex'
     }
 
     if (outputRequestedAsHex) {
-      console.log('0x' + size.toString(16))
+      console.log(toHex(size))
     } else {
       console.log(size)
     }
