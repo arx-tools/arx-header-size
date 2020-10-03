@@ -6,11 +6,11 @@ This is needed, because the files are partially compressed and this number can b
 
 ## Usage
 
-`npm run test -- "C:\arx\arx-pak-full\final\GAME\GRAPH\Levels\level8\fast.fts"`
+`npm run test -- --filename="C:\arx\arx-pak-full\final\GAME\GRAPH\Levels\level8\fast.fts"`
 
 outputs `1816`
 
-`npm run test -- "C:\arx\arx-pak-full\final\GAME\GRAPH\Levels\level8\fast.fts" -- hex`
+`npm run test -- --filename="C:\arx\arx-pak-full\final\GAME\GRAPH\Levels\level8\fast.fts" --hex`
 
 outputs `0x718`
 

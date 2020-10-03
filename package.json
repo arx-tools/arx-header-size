@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/meszaros-lajos-gyorgy/arx-header-size/issues"
   },
-  "homepage": "https://github.com/meszaros-lajos-gyorgy/arx-header-size#readme"
+  "homepage": "https://github.com/meszaros-lajos-gyorgy/arx-header-size#readme",
+  "dependencies": {
+    "minimist": "^1.2.5"
+  }
 }
