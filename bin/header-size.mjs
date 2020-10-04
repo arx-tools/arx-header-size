@@ -7,6 +7,7 @@ import { DLF_HEADER_SIZE, FTS_HEADER_SIZE, FTS_UNIQUE_HEADER_SIZE } from '../src
 import { fileExists, getPackageVersion } from './helpers.mjs'
 
 const args = minimist(process.argv.slice(2), {
+  string: ['ext'],
   boolean: ['hex', 'verbose', 'version']
 })
 
@@ -31,7 +32,7 @@ if (hasErrors) {
   process.exit(1)
 }
 
-const extension = filename.match(/\.([a-zA-Z]+)$/)[1].toLowerCase()
+const extension = args.ext || filename.match(/\.([a-zA-Z]+)$/)[1].toLowerCase()
 const supportedExtensions = ['dlf', 'fts', 'llf']
 
 if (!supportedExtensions.includes(extension)) {
