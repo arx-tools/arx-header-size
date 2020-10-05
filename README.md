@@ -21,20 +21,3 @@ outputs `0x718`
 `npx arx-header-size level8.dlf.unpacked.json --ext=dlf`
 
 outputs `8520`
-
-## Todos
-
-* implement for FTL files
-* add --verbose option, which would list out the elements of calculation
-
-verbose option would output something, like:
-
-```
-format: FTS
-
-total uncompressed data in bytes: 1816 (0x718)
-
-header size: 280 (0x118)
-unique header size: 768 (0x300)
-number of unique headers: 2
-```
