@@ -21,3 +21,5 @@ outputs `0x718`
 `npx arx-header-size level8.dlf.unpacked.json --ext=dlf`
 
 outputs `8520`
+
+`cat level8.fts | arx-header-size --ext=fts`

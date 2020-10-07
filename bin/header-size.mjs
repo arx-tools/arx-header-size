@@ -4,7 +4,9 @@ import fs from 'fs'
 import minimist from 'minimist'
 import { toHex } from '../src/helpers.mjs'
 import { DLF_HEADER_SIZE, FTS_HEADER_SIZE, FTS_UNIQUE_HEADER_SIZE } from '../src/constants.mjs'
-import { fileExists, getPackageVersion } from './helpers.mjs'
+import { fileExists, getPackageVersion, streamToBuffer } from './helpers.mjs'
+
+const SUPPORTED_EXTENSIONS = ['dlf', 'fts', 'llf']
 
 const args = minimist(process.argv.slice(2), {
   string: ['ext'],
@@ -16,27 +18,32 @@ if (args.version) {
   process.exit(0)
 }
 
-const filename = args._[0]
+let filename = args._[0]
+let extension = args.ext ? args.ext.toLowerCase() : ''
 
 let hasErrors = false
 
-if (!filename) {
-  console.error('error: filename not specified')
-  hasErrors = true
-} else if (!fileExists(filename)) {
-  console.error('error: given file does not exist')
+let input
+if (filename) {
+  if (fileExists(filename)) {
+    input = fs.createReadStream(filename)
+    if (!extension) {
+      filename.match(/\.([a-zA-Z]+)$/)[1].toLowerCase()
+    }
+  } else {
+    console.error('error: input file does not exist')
+    hasErrors = true
+  }
+} else {
+  input = process.openStdin()
+}
+
+if (!SUPPORTED_EXTENSIONS.includes(extension)) {
+  console.error('error: unsupported extension')
   hasErrors = true
 }
 
 if (hasErrors) {
-  process.exit(1)
-}
-
-const extension = args.ext || filename.match(/\.([a-zA-Z]+)$/)[1].toLowerCase()
-const supportedExtensions = ['dlf', 'fts', 'llf']
-
-if (!supportedExtensions.includes(extension)) {
-  console.error('error: unsupported file format')
   process.exit(1)
 }
 
@@ -50,7 +57,7 @@ const outputRequestedAsHex = args.hex
         size = DLF_HEADER_SIZE
         break
       case 'fts': {
-        const buffer = await fs.promises.readFile(filename)
+        const buffer = await streamToBuffer(input)
         const numberOfUniqueHeaders = buffer.readInt32LE(256)
         size = FTS_HEADER_SIZE + FTS_UNIQUE_HEADER_SIZE * numberOfUniqueHeaders
       }
@@ -60,9 +67,5 @@ const outputRequestedAsHex = args.hex
       }
     }
 
-    if (outputRequestedAsHex) {
-      console.log(toHex(size))
-    } else {
-      console.log(size)
-    }
+    console.log(outputRequestedAsHex ? toHex(size) : size)
   })()
