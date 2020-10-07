@@ -28,7 +28,7 @@ if (filename) {
   if (fileExists(filename)) {
     input = fs.createReadStream(filename)
     if (!extension) {
-      filename.match(/\.([a-zA-Z]+)$/)[1].toLowerCase()
+      extension = filename.match(/\.([a-zA-Z]+)$/)[1].toLowerCase()
     }
   } else {
     console.error('error: input file does not exist')
