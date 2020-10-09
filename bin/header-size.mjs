@@ -11,61 +11,61 @@ const SUPPORTED_EXTENSIONS = ['dlf', 'fts', 'llf']
 const args = minimist(process.argv.slice(2), {
   string: ['ext'],
   boolean: ['hex', 'verbose', 'version']
-})
+});
 
-if (args.version) {
-  console.log(getPackageVersion())
-  process.exit(0)
-}
+(async () => {
+  if (args.version) {
+    console.log(await getPackageVersion())
+    process.exit(0)
+  }
 
-let filename = args._[0]
-let extension = args.ext ? args.ext.toLowerCase() : ''
+  let filename = args._[0]
+  let extension = args.ext ? args.ext.toLowerCase() : ''
 
-let hasErrors = false
+  let hasErrors = false
 
-let input
-if (filename) {
-  if (fileExists(filename)) {
-    input = fs.createReadStream(filename)
-    if (!extension) {
-      extension = filename.match(/\.([a-zA-Z]+)$/)[1].toLowerCase()
+  let input
+  if (filename) {
+    if (await fileExists(filename)) {
+      input = fs.createReadStream(filename)
+      if (!extension) {
+        extension = filename.match(/\.([a-zA-Z]+)$/)[1].toLowerCase()
+      }
+    } else {
+      console.error('error: input file does not exist')
+      hasErrors = true
     }
   } else {
-    console.error('error: input file does not exist')
+    input = process.openStdin()
+  }
+
+  if (!SUPPORTED_EXTENSIONS.includes(extension)) {
+    console.error('error: unsupported extension')
     hasErrors = true
   }
-} else {
-  input = process.openStdin()
-}
 
-if (!SUPPORTED_EXTENSIONS.includes(extension)) {
-  console.error('error: unsupported extension')
-  hasErrors = true
-}
+  if (hasErrors) {
+    process.exit(1)
+  }
 
-if (hasErrors) {
-  process.exit(1)
-}
+  const outputRequestedAsHex = args.hex
 
-const outputRequestedAsHex = args.hex
+  let size = 0
 
-  ; (async () => {
-    let size = 0
-
-    switch (extension) {
-      case 'dlf':
-        size = DLF_HEADER_SIZE
-        break
-      case 'fts': {
-        const buffer = await streamToBuffer(input)
-        const numberOfUniqueHeaders = buffer.readInt32LE(256)
-        size = FTS_HEADER_SIZE + FTS_UNIQUE_HEADER_SIZE * numberOfUniqueHeaders
-      }
-        break
-      case 'llf': {
-        size = LLF_HEADER_SIZE
-      }
+  switch (extension) {
+    case 'dlf':
+      size = DLF_HEADER_SIZE
+      break
+    case 'fts': {
+      const buffer = await streamToBuffer(input)
+      const numberOfUniqueHeaders = buffer.readInt32LE(256)
+      size = FTS_HEADER_SIZE + FTS_UNIQUE_HEADER_SIZE * numberOfUniqueHeaders
     }
+      break
+    case 'llf': {
+      size = LLF_HEADER_SIZE
+    }
+  }
 
-    console.log(outputRequestedAsHex ? toHex(size) : size)
-  })()
+  console.log(outputRequestedAsHex ? toHex(size) : size)
+})()
