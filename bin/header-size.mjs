@@ -3,7 +3,7 @@
 import fs from 'fs'
 import minimist from 'minimist'
 import { toHex } from '../src/helpers.mjs'
-import { DLF_HEADER_SIZE, FTS_HEADER_SIZE, FTS_UNIQUE_HEADER_SIZE } from '../src/constants.mjs'
+import { DLF_HEADER_SIZE, FTS_HEADER_SIZE, FTS_UNIQUE_HEADER_SIZE, LLF_HEADER_SIZE } from '../src/constants.mjs'
 import { fileExists, getPackageVersion, streamToBuffer } from './helpers.mjs'
 
 const SUPPORTED_EXTENSIONS = ['dlf', 'fts', 'llf']
