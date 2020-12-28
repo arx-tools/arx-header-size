@@ -1,6 +1,6 @@
 {
   "name": "arx-header-size",
-  "version": "0.4.4",
+  "version": "0.5.0",
   "description": "Returns the header size for Arx Fatalis files with dynamic headers",
   "main": "src/index.js",
   "bin": {
