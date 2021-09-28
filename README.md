@@ -23,3 +23,33 @@ outputs `0x718`
 outputs `8520`
 
 `cat level8.fts | arx-header-size --ext=fts`
+
+## Command Line Parameters
+
+### version
+
+`arx-header-size --version` or `arx-header-size -v`
+
+gives back the version of arx-header-size
+
+### hex
+
+`arx-header-size --hex fast.fts`
+
+gives back the header size in hexadecimal string instead of decimal with `0x` prefix
+
+### verbose
+
+`arx-header-size fast.fts --verbose`
+
+prints out more details of the header
+
+```
+format: FTS
+
+total uncompressed data in bytes: 1816 (0x718)
+
+header size: 280 (0x118)
+unique header size: 768 (0x300)
+number of unique headers: 2
+```
