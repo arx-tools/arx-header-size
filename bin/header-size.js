@@ -10,7 +10,7 @@ const {
 } = require("./helpers.js");
 const { getHeaderSize } = require("../src/index.js");
 
-const SUPPORTED_EXTENSIONS = ["dlf", "fts", "llf"];
+const SUPPORTED_EXTENSIONS = ["dlf", "fts", "llf", "ftl"];
 
 const args = minimist(process.argv.slice(2), {
   string: ["ext"],

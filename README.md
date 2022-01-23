@@ -6,7 +6,10 @@ This is needed, because the files are partially compressed and this number can b
 
 ## Supported formats
 
-`dlf`, `fts` and `llf`
+- `dlf` (Danae Level File, contains general information about the level, used items and paths)
+- `fts` (?, contains the level mesh and textures)
+- `llf` (?, contains light entities and vertex colors)
+- `ftl` (?, model files for entities)
 
 ## Usage
 
@@ -23,6 +26,8 @@ outputs `0x718`
 outputs `8520`
 
 `cat level8.fts | arx-header-size --ext=fts`
+
+**-1 in response means the file doesn't have a compressed and decompressed part, all bytes of the file are decompressed, no need for decompression**
 
 ## Command Line Parameters
 
