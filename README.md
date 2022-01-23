@@ -7,8 +7,8 @@ This is needed, because the files are partially compressed and this number can b
 ## Supported formats
 
 - `dlf` (Danae Level File, contains general information about the level, used items and paths)
-- `fts` (?, contains the level mesh and textures)
-- `llf` (?, contains light entities and vertex colors)
+- `fts` (FasT Scene, contains the level mesh and textures)
+- `llf` (Level Lighting File?, contains light entities and vertex colors)
 - `ftl` (?, model files for entities)
 
 ## Usage
