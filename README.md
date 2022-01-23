@@ -11,6 +11,8 @@ This is needed, because the files are partially compressed and this number can b
 - `llf` (Level Lighting File?, contains light entities and vertex colors)
 - `ftl` (?, model files for entities)
 
+( https://wiki.arx-libertatis.org/Filetypes )
+
 ## Usage
 
 `npx arx-header-size "C:\arx\arx-pak-full\final\GAME\GRAPH\Levels\level8\fast.fts"`
