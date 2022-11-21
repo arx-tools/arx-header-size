@@ -2,8 +2,6 @@ const {
   DLF_HEADER_SIZE,
   FTS_HEADER_SIZE,
   FTS_UNIQUE_HEADER_SIZE,
-  LLF_HEADER_SIZE,
-  FTL_HEADER_SIZE,
 } = require("./constants.js");
 
 const getHeaderSize = (buffer, extension) => {
@@ -12,6 +10,7 @@ const getHeaderSize = (buffer, extension) => {
     header: 0,
     uniqueHeaderSize: 0,
     numberOfUniqueHeaders: 0,
+    compression: "partial", // full | partial | none
   };
 
   switch (extension) {
@@ -33,14 +32,17 @@ const getHeaderSize = (buffer, extension) => {
       break;
     case "llf":
       {
-        sizes.total = LLF_HEADER_SIZE;
-        sizes.header = LLF_HEADER_SIZE;
+        sizes.compression = "full";
       }
       break;
     case "ftl":
       {
-        sizes.total = FTL_HEADER_SIZE;
-        sizes.header = FTL_HEADER_SIZE;
+        sizes.compression = "none";
+      }
+      break;
+    case "tea":
+      {
+        sizes.compression = "none";
       }
       break;
   }

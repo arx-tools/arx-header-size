@@ -63,20 +63,41 @@ const args = minimist(process.argv.slice(2), {
   if (args.verbose) {
     console.log(`format: ${extension.toUpperCase()}`);
     console.log(``);
-    console.log(
-      `total uncompressed data in bytes: ${buffer.length} (${toHex(
-        buffer.length
-      )})`
-    );
-    console.log(``);
-    console.log(`header size: ${sizes.header} (${toHex(sizes.header)})`);
-    console.log(
-      `unique header size: ${sizes.uniqueHeaderSize} (${toHex(
-        sizes.uniqueHeaderSize
-      )})`
-    );
-    console.log(`number of unique headers: ${sizes.numberOfUniqueHeaders}`);
+
+    switch (sizes.compression) {
+      case "full":
+        console.log("file is fully compressed");
+        break;
+      case "partial":
+        console.log(
+          `total uncompressed data in bytes: ${buffer.length} (${toHex(
+            buffer.length
+          )})`
+        );
+        console.log(``);
+        console.log(`header size: ${sizes.header} (${toHex(sizes.header)})`);
+        console.log(
+          `unique header size: ${sizes.uniqueHeaderSize} (${toHex(
+            sizes.uniqueHeaderSize
+          )})`
+        );
+        console.log(`number of unique headers: ${sizes.numberOfUniqueHeaders}`);
+        break;
+      case "none":
+        console.log("file is not compressed");
+        break;
+    }
   } else {
-    console.log(outputRequestedAsHex ? toHex(sizes.total) : sizes.total);
+    switch (sizes.compression) {
+      case "full":
+        console.log(outputRequestedAsHex ? "0x0" : 0);
+        break;
+      case "partial":
+        console.log(outputRequestedAsHex ? toHex(sizes.total) : sizes.total);
+        break;
+      case "none":
+        console.log("not compressed");
+        break;
+    }
   }
 })();

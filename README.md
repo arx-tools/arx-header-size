@@ -1,6 +1,6 @@
 # arx-header-size
 
-Returns the header size for Arx Fatalis files with dynamic headers
+Returns the header size for Arx Fatalis files
 
 This is needed, because the files are partially compressed and this number can be given as an offset for [node-pkware](https://github.com/meszaros-lajos-gyorgy/node-pkware)
 
@@ -10,6 +10,7 @@ This is needed, because the files are partially compressed and this number can b
 - `fts` (FasT Scene, contains the level mesh and textures)
 - `llf` (Level Lighting File?, contains light entities and vertex colors)
 - `ftl` (?, model files for entities)
+- `tea` (?, animation files for entities)
 
 ( https://wiki.arx-libertatis.org/Filetypes )
 
