@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/meszaros-lajos-gyorgy/arx-header-size#readme",
   "dependencies": {
-    "minimist-lite": "^2.0.0"
-  }
+    "minimist-lite": "^2.2.1"
+  },
+  "keywords": [
+    "arx-fatalis"
+  ]
 }

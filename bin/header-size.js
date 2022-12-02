@@ -10,10 +10,10 @@ const {
 } = require("./helpers.js");
 const { getHeaderSize } = require("../src/index.js");
 
-const SUPPORTED_EXTENSIONS = ["dlf", "fts", "llf", "ftl"];
+const SUPPORTED_FORMATS = ["dlf", "fts", "llf", "ftl", "tea"];
 
 const args = minimist(process.argv.slice(2), {
-  string: ["ext"],
+  string: ["format"],
   boolean: ["hex", "verbose", "version"],
   alias: {
     v: "version",
@@ -22,12 +22,13 @@ const args = minimist(process.argv.slice(2), {
 
 (async () => {
   if (args.version) {
-    console.log(await getPackageVersion());
+    const version = await getPackageVersion();
+    console.log(`arx-header-size - version ${version}`);
     process.exit(0);
   }
 
   let filename = args._[0];
-  let extension = args.ext ? args.ext.toLowerCase() : "";
+  let format = args.format ? args.format.toLowerCase() : "";
 
   let hasErrors = false;
 
@@ -35,8 +36,8 @@ const args = minimist(process.argv.slice(2), {
   if (filename) {
     if (await fileExists(filename)) {
       input = fs.createReadStream(filename);
-      if (!extension) {
-        extension = filename.match(/\.([a-zA-Z]+)$/)[1].toLowerCase();
+      if (!format) {
+        format = filename.match(/\.([a-zA-Z]+)$/)[1].toLowerCase();
       }
     } else {
       console.error("error: input file does not exist");
@@ -46,8 +47,8 @@ const args = minimist(process.argv.slice(2), {
     input = process.openStdin();
   }
 
-  if (!SUPPORTED_EXTENSIONS.includes(extension)) {
-    console.error("error: unsupported extension");
+  if (!SUPPORTED_FORMATS.includes(format)) {
+    console.error("error: unsupported format");
     hasErrors = true;
   }
 
@@ -58,10 +59,10 @@ const args = minimist(process.argv.slice(2), {
   const outputRequestedAsHex = args.hex;
 
   const buffer = await streamToBuffer(input);
-  const sizes = getHeaderSize(buffer, extension);
+  const sizes = getHeaderSize(buffer, format);
 
   if (args.verbose) {
-    console.log(`format: ${extension.toUpperCase()}`);
+    console.log(`format: ${format.toUpperCase()}`);
     console.log(``);
 
     switch (sizes.compression) {

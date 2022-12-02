@@ -24,13 +24,11 @@ outputs `1816`
 
 outputs `0x718`
 
-`npx arx-header-size level8.dlf.unpacked.json --ext=dlf`
+`npx arx-header-size level8.dlf.unpacked.json --format=dlf`
 
 outputs `8520`
 
-`cat level8.fts | arx-header-size --ext=fts`
-
-**-1 in response means the file doesn't have a compressed and decompressed part, all bytes of the file are decompressed, no need for decompression**
+`cat level8.fts | arx-header-size --format=fts`
 
 ## Command Line Parameters
 
