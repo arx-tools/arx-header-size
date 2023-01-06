@@ -2,7 +2,8 @@
 
 Returns the header size for Arx Fatalis files
 
-This is needed, because the files are partially compressed and this number can be given as an offset for [node-pkware](https://github.com/meszaros-lajos-gyorgy/node-pkware)
+This is needed, because the files are partially compressed and this number can be given
+as an offset for [node-pkware](https://github.com/arx-tools/node-pkware)
 
 ## Supported formats
 

@@ -9,14 +9,14 @@
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/meszaros-lajos-gyorgy/arx-header-size.git"
+    "url": "git+https://github.com/arx-tools/arx-header-size.git"
   },
   "author": "Lajos Meszaros <m_lajos@hotmail.com>",
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/meszaros-lajos-gyorgy/arx-header-size/issues"
+    "url": "https://github.com/arx-tools/arx-header-size/issues"
   },
-  "homepage": "https://github.com/meszaros-lajos-gyorgy/arx-header-size#readme",
+  "homepage": "https://github.com/arx-tools/arx-header-size#readme",
   "dependencies": {
     "minimist-lite": "^2.2.1"
   },
