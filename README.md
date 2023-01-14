@@ -12,6 +12,7 @@ as an offset for [node-pkware](https://github.com/arx-tools/node-pkware)
 - `llf` (Level Lighting File?, contains light entities and vertex colors)
 - `ftl` (?, model files for entities)
 - `tea` (?, animation files for entities)
+- `amb` (Ambience, contains a list of audio files which are played in different locations)
 
 ( https://wiki.arx-libertatis.org/Filetypes )
 

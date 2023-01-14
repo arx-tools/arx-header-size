@@ -36,11 +36,8 @@ const getHeaderSize = (buffer, extension) => {
       }
       break;
     case "ftl":
-      {
-        sizes.compression = "none";
-      }
-      break;
     case "tea":
+    case "amb":
       {
         sizes.compression = "none";
       }
