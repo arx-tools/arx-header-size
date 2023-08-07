@@ -4,7 +4,7 @@ const {
   FTS_UNIQUE_HEADER_SIZE,
 } = require("./constants.js");
 
-const getHeaderSize = (buffer, extension) => {
+const getHeaderSize = (buffer, format) => {
   const sizes = {
     total: 0,
     header: 0,
@@ -13,7 +13,7 @@ const getHeaderSize = (buffer, extension) => {
     compression: "partial", // full | partial | none
   };
 
-  switch (extension) {
+  switch (format) {
     case "dlf":
       {
         sizes.total = DLF_HEADER_SIZE;
