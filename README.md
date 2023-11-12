@@ -13,6 +13,7 @@ as an offset for [node-pkware](https://github.com/arx-tools/node-pkware)
 - `ftl` (?, model files for entities)
 - `tea` (?, animation files for entities)
 - `amb` (Ambience, contains a list of audio files which are played in different locations)
+- `cin` (Cinematics)
 
 ( https://wiki.arx-libertatis.org/Filetypes )
 

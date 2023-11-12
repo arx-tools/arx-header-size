@@ -10,7 +10,7 @@ const {
 } = require("./helpers.js");
 const { getHeaderSize } = require("../src/index.js");
 
-const SUPPORTED_FORMATS = ["dlf", "fts", "llf", "ftl", "tea", "amb"];
+const SUPPORTED_FORMATS = ["dlf", "fts", "llf", "ftl", "tea", "amb", "cin"];
 
 const args = minimist(process.argv.slice(2), {
   string: ["format"],

@@ -38,6 +38,7 @@ const getHeaderSize = (buffer, format) => {
     case "ftl":
     case "tea":
     case "amb":
+    case "cin":
       {
         sizes.compression = "none";
       }
