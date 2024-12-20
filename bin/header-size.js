@@ -1,22 +1,17 @@
 #!/usr/bin/env node
 
-const fs = require("fs");
-const minimist = require("minimist-lite");
-const {
-  toHex,
-  fileExists,
-  getPackageVersion,
-  streamToBuffer,
-} = require("./helpers.js");
-const { getHeaderSize } = require("../src/index.js");
+const fs = require('fs');
+const minimist = require('minimist-lite');
+const { toHex, fileExists, getPackageVersion, streamToBuffer } = require('./helpers.js');
+const { getHeaderSize } = require('../src/index.js');
 
-const SUPPORTED_FORMATS = ["dlf", "fts", "llf", "ftl", "tea", "amb", "cin"];
+const SUPPORTED_FORMATS = ['dlf', 'fts', 'llf', 'ftl', 'tea', 'amb', 'cin'];
 
 const args = minimist(process.argv.slice(2), {
-  string: ["format"],
-  boolean: ["hex", "verbose", "version"],
+  string: ['format'],
+  boolean: ['hex', 'verbose', 'version'],
   alias: {
-    v: "version",
+    v: 'version',
   },
 });
 
@@ -28,7 +23,7 @@ const args = minimist(process.argv.slice(2), {
   }
 
   let filename = args._[0];
-  let format = args.format ? args.format.toLowerCase() : "";
+  let format = args.format ? args.format.toLowerCase() : '';
 
   let hasErrors = false;
 
@@ -40,7 +35,7 @@ const args = minimist(process.argv.slice(2), {
         format = filename.match(/\.([a-zA-Z]+)$/)[1].toLowerCase();
       }
     } else {
-      console.error("error: input file does not exist");
+      console.error('error: input file does not exist');
       hasErrors = true;
     }
   } else {
@@ -48,7 +43,7 @@ const args = minimist(process.argv.slice(2), {
   }
 
   if (!SUPPORTED_FORMATS.includes(format)) {
-    console.error("error: unsupported format");
+    console.error('error: unsupported format');
     hasErrors = true;
   }
 
@@ -66,38 +61,30 @@ const args = minimist(process.argv.slice(2), {
     console.log(``);
 
     switch (sizes.compression) {
-      case "full":
-        console.log("file is fully compressed");
+      case 'full':
+        console.log('file is fully compressed');
         break;
-      case "partial":
-        console.log(
-          `total uncompressed data in bytes: ${buffer.length} (${toHex(
-            buffer.length
-          )})`
-        );
+      case 'partial':
+        console.log(`total uncompressed data in bytes: ${buffer.length} (${toHex(buffer.length)})`);
         console.log(``);
         console.log(`header size: ${sizes.header} (${toHex(sizes.header)})`);
-        console.log(
-          `unique header size: ${sizes.uniqueHeaderSize} (${toHex(
-            sizes.uniqueHeaderSize
-          )})`
-        );
+        console.log(`unique header size: ${sizes.uniqueHeaderSize} (${toHex(sizes.uniqueHeaderSize)})`);
         console.log(`number of unique headers: ${sizes.numberOfUniqueHeaders}`);
         break;
-      case "none":
-        console.log("file is not compressed");
+      case 'none':
+        console.log('file is not compressed');
         break;
     }
   } else {
     switch (sizes.compression) {
-      case "full":
-        console.log(outputRequestedAsHex ? "0x0" : 0);
+      case 'full':
+        console.log(outputRequestedAsHex ? '0x0' : 0);
         break;
-      case "partial":
+      case 'partial':
         console.log(outputRequestedAsHex ? toHex(sizes.total) : sizes.total);
         break;
-      case "none":
-        console.log("not compressed");
+      case 'none':
+        console.log('not compressed');
         break;
     }
   }

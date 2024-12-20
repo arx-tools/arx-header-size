@@ -1,8 +1,4 @@
-const {
-  DLF_HEADER_SIZE,
-  FTS_HEADER_SIZE,
-  FTS_UNIQUE_HEADER_SIZE,
-} = require("./constants.js");
+const { DLF_HEADER_SIZE, FTS_HEADER_SIZE, FTS_UNIQUE_HEADER_SIZE } = require('./constants.js');
 
 /**
  * @param {ArrayBuffer} buffer
@@ -18,39 +14,38 @@ const getHeaderSize = (buffer, format) => {
     header: 0,
     uniqueHeaderSize: 0,
     numberOfUniqueHeaders: 0,
-    compression: "partial",
+    compression: 'partial',
   };
 
   switch (format) {
-    case "dlf":
+    case 'dlf':
       {
         sizes.total = DLF_HEADER_SIZE;
         sizes.header = DLF_HEADER_SIZE;
       }
       break;
-    case "fts":
+    case 'fts':
       {
         const dataView = new DataView(buffer);
         const numberOfUniqueHeaders = dataView.getInt32(256, true);
 
-        sizes.total =
-          FTS_HEADER_SIZE + FTS_UNIQUE_HEADER_SIZE * numberOfUniqueHeaders;
+        sizes.total = FTS_HEADER_SIZE + FTS_UNIQUE_HEADER_SIZE * numberOfUniqueHeaders;
         sizes.header = FTS_HEADER_SIZE;
         sizes.uniqueHeaderSize = FTS_UNIQUE_HEADER_SIZE;
         sizes.numberOfUniqueHeaders = numberOfUniqueHeaders;
       }
       break;
-    case "llf":
+    case 'llf':
       {
-        sizes.compression = "full";
+        sizes.compression = 'full';
       }
       break;
-    case "ftl":
-    case "tea":
-    case "amb":
-    case "cin":
+    case 'ftl':
+    case 'tea':
+    case 'amb':
+    case 'cin':
       {
-        sizes.compression = "none";
+        sizes.compression = 'none';
       }
       break;
   }

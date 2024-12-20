@@ -1,4 +1,4 @@
-const fs = require("fs");
+const fs = require('fs');
 
 const fileExists = async (filename) => {
   try {
@@ -11,29 +11,29 @@ const fileExists = async (filename) => {
 
 const getPackageVersion = async () => {
   try {
-    const { version } = require("../package.json");
+    const { version } = require('../package.json');
     return version;
   } catch (error) {
-    return "unknown";
+    return 'unknown';
   }
 };
 
 const streamToBuffer = (input) =>
   new Promise((resolve, reject) => {
     const chunks = [];
-    input.on("data", (chunk) => {
+    input.on('data', (chunk) => {
       chunks.push(chunk);
     });
-    input.on("end", () => {
+    input.on('end', () => {
       resolve(Buffer.concat(chunks));
     });
-    input.on("error", (e) => {
+    input.on('error', (e) => {
       reject(e);
     });
   });
 
 const toHex = (n) => {
-  return "0x" + n.toString(16);
+  return '0x' + n.toString(16);
 };
 
 module.exports = {

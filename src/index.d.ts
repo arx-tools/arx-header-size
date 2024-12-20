@@ -1,10 +1,10 @@
 export declare const getHeaderSize: (
   buffer: ArrayBuffer,
-  format: "dlf" | "fts" | "llf" | "ftl" | "tea" | "amb" | "cin"
+  format: 'dlf' | 'fts' | 'llf' | 'ftl' | 'tea' | 'amb' | 'cin'
 ) => {
   total: number;
   header: number;
   uniqueHeaderSize: number;
   numberOfUniqueHeaders: number;
-  compression: "full" | "partial" | "none";
+  compression: 'full' | 'partial' | 'none';
 };
