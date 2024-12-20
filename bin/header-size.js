@@ -60,7 +60,7 @@ if (hasErrors) {
 const outputRequestedAsHex = args.hex;
 
 const buffer = await streamToBuffer(input);
-const sizes = getHeaderSize(buffer, format);
+const sizes = getHeaderSize(buffer.buffer, format);
 
 if (args.verbose) {
   console.log(`format: ${format.toUpperCase()}`);
