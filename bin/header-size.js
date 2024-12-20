@@ -71,7 +71,7 @@ if (args.verbose) {
       console.log('file is fully compressed');
       break;
     case 'partial':
-      console.log(`total uncompressed data in bytes: ${buffer.length} (${toHex(buffer.length)})`);
+      console.log(`total uncompressed data in bytes: ${sizes.total} (${toHex(sizes.total)})`);
       console.log(``);
       console.log(`header size: ${sizes.header} (${toHex(sizes.header)})`);
       console.log(`unique header size: ${sizes.uniqueHeaderSize} (${toHex(sizes.uniqueHeaderSize)})`);
