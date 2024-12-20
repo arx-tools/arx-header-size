@@ -4,13 +4,21 @@ const {
   FTS_UNIQUE_HEADER_SIZE,
 } = require("./constants.js");
 
+/**
+ * @param {ArrayBuffer} buffer
+ * @param {"dlf" | "fts" | "llf" | "ftl" | "tea" | "amb" | "cin"} format
+ * @returns {{ total: number, header: number, uniqueHeaderSize: number, numberOfUniqueHeaders: number, compression: "full" | "partial" | "none" }}
+ */
 const getHeaderSize = (buffer, format) => {
+  /**
+   * @type {{ total: number, header: number, uniqueHeaderSize: number, numberOfUniqueHeaders: number, compression: "full" | "partial" | "none" }}
+   */
   const sizes = {
     total: 0,
     header: 0,
     uniqueHeaderSize: 0,
     numberOfUniqueHeaders: 0,
-    compression: "partial", // full | partial | none
+    compression: "partial",
   };
 
   switch (format) {
@@ -22,7 +30,9 @@ const getHeaderSize = (buffer, format) => {
       break;
     case "fts":
       {
-        const numberOfUniqueHeaders = buffer.readInt32LE(256);
+        const dataView = new DataView(buffer);
+        const numberOfUniqueHeaders = dataView.getInt32(256, true);
+
         sizes.total =
           FTS_HEADER_SIZE + FTS_UNIQUE_HEADER_SIZE * numberOfUniqueHeaders;
         sizes.header = FTS_HEADER_SIZE;

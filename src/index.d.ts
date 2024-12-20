@@ -1,8 +1,5 @@
-/// <reference types="node" />
-import { Buffer } from "node:buffer";
-
 export declare const getHeaderSize: (
-  buffer: Buffer,
+  buffer: ArrayBuffer,
   format: "dlf" | "fts" | "llf" | "ftl" | "tea" | "amb" | "cin"
 ) => {
   total: number;
