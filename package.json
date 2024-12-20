@@ -4,8 +4,19 @@
   "description": "Returns the header size for Arx Fatalis files with dynamic headers",
   "main": "src/index.js",
   "types": "src/index.d.ts",
+  "type": "module",
+  "engines": {
+    "npm": ">=8.0.0",
+    "node": ">=18.0.0"
+  },
   "bin": {
     "arx-header-size": "bin/header-size.js"
+  },
+  "exports": {
+    ".": {
+      "default": "./src/index.js",
+      "types": "./src/index.d.ts"
+    }
   },
   "scripts": {},
   "repository": {

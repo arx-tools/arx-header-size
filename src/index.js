@@ -1,11 +1,11 @@
-const { DLF_HEADER_SIZE, FTS_HEADER_SIZE, FTS_UNIQUE_HEADER_SIZE } = require('./constants.js');
+import { DLF_HEADER_SIZE, FTS_HEADER_SIZE, FTS_UNIQUE_HEADER_SIZE } from './constants.js';
 
 /**
  * @param {ArrayBuffer} buffer
  * @param {"dlf" | "fts" | "llf" | "ftl" | "tea" | "amb" | "cin"} format
  * @returns {{ total: number, header: number, uniqueHeaderSize: number, numberOfUniqueHeaders: number, compression: "full" | "partial" | "none" }}
  */
-const getHeaderSize = (buffer, format) => {
+export function getHeaderSize(buffer, format) {
   /**
    * @type {{ total: number, header: number, uniqueHeaderSize: number, numberOfUniqueHeaders: number, compression: "full" | "partial" | "none" }}
    */
@@ -51,6 +51,4 @@ const getHeaderSize = (buffer, format) => {
   }
 
   return sizes;
-};
-
-module.exports = { getHeaderSize };
+}
