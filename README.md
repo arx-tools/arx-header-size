@@ -17,6 +17,31 @@ as an offset for [node-pkware](https://github.com/arx-tools/node-pkware)
 
 ( https://wiki.arx-libertatis.org/Filetypes )
 
+## Compression for each format
+
+### DLF
+
+DLF files are **partially compressed**, they have a fixed header size of `8520` bytes.
+
+### FTS
+
+FTS files are **partially compressed**, they have a fixed basic header with an arbitrary
+amount of unique headers, where the amount of unique headers is stored on byte `256`.
+
+The total uncompressed header size is `280 + 768 * <amount of unique headers>`.
+
+Arx Libertatis 1.3 snapshots released after 2022-09-17 contain a feature
+where if byte `264` of an FTS file is set to 0 then it means the whole
+file is uncompressed.
+
+### LLF
+
+LLF files are **fully compressed**, there's no uncompressed header.
+
+### Other files
+
+All other files (FTL, TEA, AMB, CIN) are not compressed, they don't need to be uncompressed.
+
 ## JS API
 
 ```ts
@@ -84,15 +109,3 @@ header size: 280 (0x118)
 unique header size: 768 (0x300)
 number of unique headers: 2
 ```
-
-### Uncompressed FTS files in Arx Libertatis 1.3
-
-Arx Libertatis feature: setting the uncompressed bytes' size in the header of an FTS file to 0 gets
-interpreted as the file being uncompressed
-
-source of discussion: https://arx-libertatis.org/irclogs/2022/%23arx.2022-09-06.log
-and https://arx-libertatis.org/irclogs/2022/%23arx.2022-09-07.log
-
-implemented in: https://github.com/arx/ArxLibertatis/commit/2d2226929780b6202f54982bacc79ddf75dbec53
-
-available in Arx Libertatis 1.3 snapshots that came after `2022-09-17` in https://arx-libertatis.org/files/snapshots/
