@@ -1,7 +1,9 @@
 import { DLF_HEADER_SIZE, FTS_HEADER_SIZE, FTS_UNIQUE_HEADER_SIZE } from './constants.js';
 
+export { DLF_HEADER_SIZE, FTS_HEADER_SIZE, FTS_UNIQUE_HEADER_SIZE };
+
 /**
- * @param {ArrayBuffer} buffer
+ * @param {ArrayBufferLike} buffer
  * @param {"dlf" | "fts" | "llf" | "ftl" | "tea" | "amb" | "cin"} format
  * @returns {{ total: number, header: number, uniqueHeaderSize: number, numberOfUniqueHeaders: number, compression: "full" | "partial" | "none" }}
  */

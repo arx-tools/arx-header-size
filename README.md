@@ -23,6 +23,8 @@ as an offset for [node-pkware](https://github.com/arx-tools/node-pkware)
 
 DLF files are **partially compressed**, they have a fixed header size of `8520` bytes.
 
+8520 is also available as a constant: `DLF_HEADER_SIZE`
+
 ### FTS
 
 FTS files are **partially compressed**, they have a fixed basic header with an arbitrary
@@ -33,6 +35,8 @@ The total uncompressed header size is `280 + 768 * <amount of unique headers>`.
 Arx Libertatis 1.3 snapshots released after 2022-09-17 contain a feature
 where if byte `264` of an FTS file is set to 0 then it means the whole
 file is uncompressed.
+
+280 and 768 are both available as constants: `FTS_HEADER_SIZE` and `FTS_UNIQUE_HEADER_SIZE` respectively
 
 ### LLF
 

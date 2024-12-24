@@ -3,29 +3,29 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 /**
- * @param {Uint8Array[]} buffers
- * @returns {Uint8Array}
+ * @param {ArrayBufferLike[]} buffers
+ * @returns {ArrayBuffer}
  *
  * @see https://stackoverflow.com/a/49129872/1806628
  */
-function concatUint8Arrays(buffers) {
+export function concatArrayBuffers(buffers) {
   if (buffers.length === 0) {
-    return new Uint8Array(0);
+    return new ArrayBuffer(0);
   }
 
   const totalLength = buffers.reduce((sum, buffer) => {
-    return sum + buffer.length;
+    return sum + buffer.byteLength;
   }, 0);
 
   const combinedBuffer = new Uint8Array(totalLength);
 
   let offset = 0;
   buffers.forEach((buffer) => {
-    combinedBuffer.set(buffer, offset);
-    offset = offset + buffer.length;
+    combinedBuffer.set(new Uint8Array(buffer), offset);
+    offset = offset + buffer.byteLength;
   });
 
-  return combinedBuffer;
+  return combinedBuffer.buffer;
 }
 
 /**
@@ -69,27 +69,23 @@ export async function fileExists(filename) {
 
 /**
  * @param {NodeJS.ReadableStream} input
- * @returns {Promise<Uint8Array>}
+ * @returns {Promise<ArrayBuffer>}
  */
 export async function streamToBuffer(input) {
   return new Promise((resolve, reject) => {
     /**
-     * @type {Uint8Array[]}
+     * @type {ArrayBufferLike[]}
      */
     const chunks = [];
 
-    // chunk is techincally a Buffer, but here it's Uint8Array
-    // "The Buffer class is a subclass of JavaScript's Uint8Array class and extends it"
-    // source: https://nodejs.org/api/buffer.html#buffer
     input.on('data', (chunk) => {
-      chunks.push(chunk);
+      chunks.push(chunk.buffer);
     });
 
     input.on('end', () => {
-      resolve(concatUint8Arrays(chunks));
+      resolve(concatArrayBuffers(chunks));
     });
 
-    // e is unknown
     input.on('error', (e) => {
       if (e instanceof Error) {
         reject(e);
