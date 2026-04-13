@@ -5,6 +5,29 @@ Returns the header size for Arx Fatalis files
 This is needed, because the files are partially compressed and this number can be given
 as an offset for [node-pkware](https://github.com/arx-tools/node-pkware)
 
+## Installation
+
+### node.js
+
+`npm i -g arx-header-size`
+
+### browser
+
+```html
+<script type="importmap">
+  {
+    "imports": {
+      "arx-header-size": "https://esm.sh/arx-header-size"
+    }
+  }
+</script>
+<script type="module">
+  import { getHeaderSize } from "arx-header-size";
+
+  // ...
+</script>
+```
+
 ## Supported formats
 
 - `dlf` (Danae Level File, contains general information about the level, used items and paths)
