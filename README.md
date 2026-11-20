@@ -53,13 +53,21 @@ DLF files are **partially compressed**, they have a fixed header size of `8520` 
 FTS files are **partially compressed**, they have a fixed basic header with an arbitrary
 amount of unique headers, where the amount of unique headers is stored on byte `256`.
 
-The total uncompressed header size is `280 + 768 * <amount of unique headers>`.
+The format has two header layouts:
+
+- **0.141 and later**: the basic header is `280` bytes (the path, the amount of unique headers, the version, the
+  uncompressed size and the padding), so the total uncompressed header size is
+  `280 + 768 * <amount of unique headers>`. 280 is available as `FTS_HEADER_SIZE`.
+- **before 0.141** (the demo is `0.139`): the basic header is `264` bytes (the path, the amount of unique headers and
+  the version, without the size and the padding), so the total is `264 + 768 * <amount of unique headers>`. 264 is
+  available as `FTS_HEADER_SIZE_LEGACY`.
+
+Both layouts keep the amount of unique headers on byte `256` and the version on byte `260`, which is what tells them
+apart. The unique header size (`768`) is the same in both, and is available as `FTS_UNIQUE_HEADER_SIZE`.
 
 Arx Libertatis 1.3 snapshots released after 2022-09-17 contain a feature
-where if byte `264` of an FTS file is set to 0 then it means the whole
-file is uncompressed.
-
-280 and 768 are both available as constants: `FTS_HEADER_SIZE` and `FTS_UNIQUE_HEADER_SIZE` respectively
+where if byte `264` of a FTS file of the 0.141 layout is set to 0 then it means
+the whole file is uncompressed. The older layout has no such variant.
 
 ### LLF
 

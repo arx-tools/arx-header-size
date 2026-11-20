@@ -11,4 +11,5 @@ export declare function getHeaderSize(
 
 export declare const DLF_HEADER_SIZE: 8520;
 export declare const FTS_HEADER_SIZE: 280;
+export declare const FTS_HEADER_SIZE_LEGACY: 264;
 export declare const FTS_UNIQUE_HEADER_SIZE: 768;
